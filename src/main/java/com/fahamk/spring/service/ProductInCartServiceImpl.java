@@ -17,9 +17,9 @@ public class ProductInCartServiceImpl implements ProductInCartService {
 	private ProductInCartDAO productInCartDAO;
 	
 	@Override
+	@Transactional
 	public long save(ProductInCart ProductInCart) {
-		// TODO Auto-generated method stub
-		return 0;
+		return productInCartDAO.save(ProductInCart);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class ProductInCartServiceImpl implements ProductInCartService {
 
 	@Override
 	@Transactional
-	public List<ProductInCart> list(User user) {
+	public List<ProductInCart> list(String user) {
 		// TODO Auto-generated method stub
 		return productInCartDAO.list(user);
 	}
@@ -42,9 +42,9 @@ public class ProductInCartServiceImpl implements ProductInCartService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(long id) {
-		// TODO Auto-generated method stub
-		
+		productInCartDAO.delete(id);
 	}
 
 }

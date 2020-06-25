@@ -10,7 +10,7 @@ public interface ProductInCartDAO {
 	
 	ProductInCart get(long id);
 	
-	List<ProductInCart> list(User userId);
+	List<ProductInCart> list(String userId);
 	
 	void update(long id, ProductInCart product);
 	

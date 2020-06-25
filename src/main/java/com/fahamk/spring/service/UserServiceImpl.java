@@ -2,8 +2,8 @@ package com.fahamk.spring.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import javax.transaction.Transactional;
 
-import com.fahamk.spring.dao.ProductDAO;
 import com.fahamk.spring.dao.UserDAOImpl;
 import com.fahamk.spring.model.User;
 
@@ -14,9 +14,9 @@ public class UserServiceImpl implements UserService {
 	private UserDAOImpl UserDAO;
 	
 	@Override
+	@Transactional
 	public long save(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return UserDAO.save(user);
 	}
 
 	@Override

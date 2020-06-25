@@ -10,9 +10,10 @@ public interface ProductInCartService {
 	
 	ProductInCart get(long id);
 	
-	List<ProductInCart> list(User user);
+	List<ProductInCart> list(String user);
 	
 	void update(long id, int quanity);
 	
 	void delete(long id);
+
 }

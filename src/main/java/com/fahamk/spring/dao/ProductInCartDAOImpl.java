@@ -2,6 +2,7 @@ package com.fahamk.spring.dao;
 
 import java.util.List;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,18 @@ public class ProductInCartDAOImpl implements ProductInCartDAO {
 	
 	@Override
 	public long save(ProductInCart productInCart) {
-		// TODO Auto-generated method stub
+		String userID = productInCart.getFk_userId();
+		int productID = productInCart.getFk_productid();
+		Query query =  sessionFactory.getCurrentSession().createQuery("from ProductInCart where fk_userId=:userId and fk_productid=:productId");
+		query.setParameter("userId", userID);
+		query.setParameter("productId", productID);
+		List<ProductInCart> list = query.list();
+		if(list.size()>0) {
+			int quanity = productInCart.getQuantity();
+			productInCart = list.get(0);
+			productInCart.setQuantity(quanity);
+		}
+		sessionFactory.getCurrentSession().saveOrUpdate(productInCart);
 		return productInCart.getpCartid();
 	}
 
@@ -29,8 +41,8 @@ public class ProductInCartDAOImpl implements ProductInCartDAO {
 	}
 
 	@Override
-	public List<ProductInCart> list(User userId) {
-		Query query =  sessionFactory.getCurrentSession().createQuery("from ProductInCart where user=:userId");
+	public List<ProductInCart> list(String userId) {
+		Query query =  sessionFactory.getCurrentSession().createQuery("from ProductInCart where fk_userId=:userId");
 		query.setParameter("userId", userId);
 		return query.list();
 	}
@@ -44,7 +56,9 @@ public class ProductInCartDAOImpl implements ProductInCartDAO {
 	@Override
 	public void delete(long id) {
 		// TODO Auto-generated method stub
-		
+		Session session = sessionFactory.getCurrentSession();
+		ProductInCart productInCart = session.byId(ProductInCart.class).load(id);
+		session.delete(productInCart);
 	}
 
 }

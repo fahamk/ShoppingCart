@@ -14,7 +14,7 @@ public class UserDAOImpl implements UserDAO {
 
 	@Override
 	public long save(User user) {
-		// TODO Auto-generated method stub
+		sessionFactory.getCurrentSession().save(user);
 		return user.getUserId();
 	}
 

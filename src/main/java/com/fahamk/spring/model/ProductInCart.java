@@ -15,15 +15,11 @@ public class ProductInCart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long pCartid; 
 	private int quantity;
+	private String name;
+	private float price;
+	private String fk_userId;
+	private int fk_productid;
 	
-	@ManyToOne
-	@JoinColumn(name = "userId")
-	private User user;
-	
-	@ManyToOne
-	@JoinColumn(name = "id")
-	private Product product;
-
 	public long getpCartid() {
 		return pCartid;
 	}
@@ -36,24 +32,40 @@ public class ProductInCart {
 		return quantity;
 	}
 
-	public void setQuantity(int quantity) {
+	public void setQuantity(int quantity) { 
 		this.quantity = quantity;
 	}
 
-	public User getUser() {
-		return user;
+	public String getFk_userId() {
+		return fk_userId;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setFk_userId(String fk_userId) {
+		this.fk_userId = fk_userId;
 	}
 
-	public Product getProduct() {
-		return product;
+	public int getFk_productid() {
+		return fk_productid;
 	}
 
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setFk_productid(int fk_productid) {
+		this.fk_productid = fk_productid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
 	}
 	
 	
